@@ -4,6 +4,7 @@
 
 package-lock.json
 temp
+.env
 
 # dependencies
 /node_modules
