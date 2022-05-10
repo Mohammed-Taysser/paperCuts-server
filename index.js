@@ -19,6 +19,17 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false, limit: '30mb' })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json({ limit: '30mb' })); // parse application/json
 
+// Serving static files
+app.use('/static', express.static('static'));
+
+// create index page for documentation
+app.set('views', './views');
+app.set('view engine', 'pug');
+
+app.all('/', (_, response) => {
+  response.status(200).render('index');
+});
+
 // connect to DB
 mongoose
   .connect(MONGO_URL)
