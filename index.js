@@ -5,6 +5,10 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 require('dotenv').config();
 
+const servicesRoutes = require('./routes/servicesRoutes');
+const teamRoutes = require('./routes/teamRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
+
 const app = express();
 
 // logger
@@ -34,6 +38,10 @@ app.all('/', (_, response) => {
 mongoose
   .connect(MONGO_URL)
   .then(() => {
+    // routes
+    app.use('/api/services', servicesRoutes);
+    app.use('/api/team', teamRoutes);
+    app.use('/api/category', categoryRoutes);
 
     app.listen(PORT, () => {
       console.log(`PaperCuts Server listening on port:${PORT}`);
