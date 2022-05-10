@@ -10,6 +10,7 @@ const teamRoutes = require('./routes/teamRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const testimonialRoutes = require('./routes/testimonialRoutes');
 const eventRoutes = require('./routes/eventRoutes');
+const authorRoutes = require('./routes/authorRoutes');
 
 const app = express();
 
@@ -46,6 +47,7 @@ mongoose
     app.use('/api/category', categoryRoutes);
     app.use('/api/testimonial', testimonialRoutes);
     app.use('/api/events', eventRoutes);
+    app.use('/api/authors', authorRoutes);
 
     app.listen(PORT, () => {
       console.log(`PaperCuts Server listening on port:${PORT}`);
