@@ -1,0 +1,8 @@
+body {
+  text-transform: capitalize;
+}
+
+code,
+pre {
+  text-transform: none;
+}
