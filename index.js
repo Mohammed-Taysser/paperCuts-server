@@ -12,6 +12,7 @@ const testimonialRoutes = require('./routes/testimonialRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const authorRoutes = require('./routes/authorRoutes');
 const booksRoutes = require('./routes/booksRoutes');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
@@ -50,6 +51,7 @@ mongoose
     app.use('/api/events', eventRoutes);
     app.use('/api/authors', authorRoutes);
     app.use('/api/books', booksRoutes);
+    app.use('/api/auth', authRoutes);
 
     app.listen(PORT, () => {
       console.log(`PaperCuts Server listening on port:${PORT}`);
