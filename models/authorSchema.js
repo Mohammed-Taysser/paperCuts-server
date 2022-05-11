@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const { Schema } = mongoose;
 
 const authorSchema = new Schema(
   {
-    title: String,
     username: { type: String, required: true, unique: true },
-    role: { type: String, default: 'user' },
+    role: { type: String, default: 'author' },
     firstName: String,
     lastName: String,
     avatar: {
@@ -39,5 +39,10 @@ const authorSchema = new Schema(
     },
   }
 );
+
+authorSchema.pre('save', async function () {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
 module.exports = mongoose.model('Authors', authorSchema);
