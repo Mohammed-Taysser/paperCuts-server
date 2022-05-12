@@ -6,15 +6,15 @@ const authorSchema = new Schema(
   {
     username: { type: String, required: true, unique: true },
     role: { type: String, default: 'author' },
-    firstName: String,
-    lastName: String,
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
     avatar: {
       type: String,
       default:
         'https://cdn.jsdelivr.net/gh/Mohammed-Taysser/rakm1@master/paperCuts/authors/img/avatar-1.png',
     },
-    email: String,
-    password: String,
+    email: { type: String, required: true },
+    password: { type: String, required: true },
     info: String,
     extraInfo: String,
     socialMedia: {
@@ -39,6 +39,26 @@ const authorSchema = new Schema(
     },
   }
 );
+
+authorSchema.statics.isExist = async function (username, email) {
+  const existUsername = await this.findOne({ username });
+  const existEmail = await this.findOne({ email });
+
+  if (existUsername && existEmail) {
+    return { exist: true, error: 'username & email already exist' };
+  }
+
+  if (existUsername) {
+    return { exist: true, error: 'username already exist' };
+  }
+  if (existEmail) {
+    return { exist: true, error: 'email already exist' };
+  }
+
+  if (!existUsername && !existEmail) {
+    return { exist: false };
+  }
+};
 
 authorSchema.pre('save', async function () {
   const salt = await bcrypt.genSalt(10);
