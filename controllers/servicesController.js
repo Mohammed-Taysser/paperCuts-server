@@ -7,7 +7,7 @@ exports.all = async (_, response) => {
   await schema
     .find()
     .then((results) => {
-      response.json(results);
+      response.status(statusCode.success.ok).json(results);
     })
     .catch((error) =>
       catchError(response, statusCode.error.serverError, error.message)
