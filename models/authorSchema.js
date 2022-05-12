@@ -45,14 +45,20 @@ authorSchema.statics.isExist = async function (username, email) {
   const existEmail = await this.findOne({ email });
 
   if (existUsername && existEmail) {
-    return { exist: true, error: 'username & email already exist' };
+    return {
+      exist: true,
+      error: {
+        username: `username not available`,
+        email: `email not available`,
+      },
+    };
   }
 
   if (existUsername) {
-    return { exist: true, error: 'username already exist' };
+    return { exist: true, error: {username: `username not available`} };
   }
   if (existEmail) {
-    return { exist: true, error: 'email already exist' };
+    return { exist: true, error: { email: `email not available`} };
   }
 
   if (!existUsername && !existEmail) {
