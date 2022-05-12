@@ -1,31 +1,23 @@
 const validator = require('validator/validator');
 
-module.exports = (requestBody) => {
-  const {username, email, password} = requestBody
-  
-  let errorAsArray = [],
-    querySearch = {};
+module.exports = (email, password) => {
+  let errorAsObject = {};
 
-  if ((username || email) && password) {
-    if (username) {
-      querySearch.username = username;
-      if (!validator.isSlug(username)) {
-        errorAsArray.push(`please provide valid username`);
-      }
-    } else if (email) {
-      querySearch.email = email;
-
-      if (!validator.isEmail(email)) {
-        errorAsArray.push(`please provide valid email`);
-      }
-    }
-
-    if (!validator.isStrongPassword(password)) {
-      errorAsArray.push(`please provide strong password`);
+  if (email) {
+    if (!validator.isEmail(email)) {
+      errorAsObject.email = `please provide valid email`;
     }
   } else {
-    errorAsArray.push(`make sure username or email and password are provided`);
+    errorAsObject.username = `email is missing`;
   }
 
-  return { errorAsArray, querySearch };
+  if (password) {
+    if (!validator.isStrongPassword(password)) {
+      errorAsObject.password = `please provide strong password`;
+    }
+  } else {
+    errorAsObject.password = `password is missing`;
+  }
+
+  return errorAsObject;
 };
