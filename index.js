@@ -3,6 +3,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const hpp = require('hpp');
 require('dotenv').config();
 
 const servicesRoutes = require('./routes/servicesRoutes');
@@ -24,9 +27,25 @@ app.use(logger('dev'));
 const { PORT = 8080, MONGO_URL } = process.env;
 
 // middleware
+app.use(helmet());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false, limit: '30mb' })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json({ limit: '30mb' })); // parse application/json
+
+app.use(hpp()); // Make sure the body is parsed beforehand.
+
+app.use(
+  rateLimit({
+    windowMs: 60 * 60 * 1000, // 60 minutes
+    max: 100, // Limit each IP to 100 requests per `window` (here, per 60 minutes)
+    message:
+      'Too many accounts created from this IP, please try again after an hour',
+    handler: (_, response, __, options) =>
+      response.status(options.statusCode).json({ error: options.message }),
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  })
+);
 
 // Serving static files
 app.use('/static', express.static('static'));
