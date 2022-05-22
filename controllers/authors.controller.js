@@ -6,7 +6,7 @@ exports.all = async (_, response) => {
   await schema
     .find()
     .then((results) => {
-      response.json(results);
+      response.status(statusCode.success.ok).json(results);
     })
     .catch((error) =>
       catchError(response, statusCode.error.serverError, error.message)
@@ -16,7 +16,7 @@ exports.all = async (_, response) => {
 exports.view = async (request, response) => {
   const slug = request.params.slug;
   await schema
-    .find({ slug })
+    .find({ username: slug })
     .then((results) => {
       if (results.length === 1) {
         response.status(statusCode.success.ok).json(results[0]);
@@ -28,4 +28,3 @@ exports.view = async (request, response) => {
       catchError(response, statusCode.error.notFound, error.message)
     );
 };
-
