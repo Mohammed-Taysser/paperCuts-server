@@ -8,15 +8,15 @@ const helmet = require('helmet');
 const hpp = require('hpp');
 require('dotenv').config();
 
-const servicesRoutes = require('./routes/servicesRoutes');
-const teamRoutes = require('./routes/teamRoutes');
-const categoryRoutes = require('./routes/categoryRoutes');
-const testimonialRoutes = require('./routes/testimonialRoutes');
-const eventRoutes = require('./routes/eventRoutes');
-const authorRoutes = require('./routes/authorRoutes');
-const booksRoutes = require('./routes/booksRoutes');
+const servicesRoutes = require('./routes/services.route');
+const teamRoutes = require('./routes/team.route');
+const categoryRoutes = require('./routes/category.route');
+const testimonialRoutes = require('./routes/testimonial.route');
+const eventRoutes = require('./routes/event.route');
+const authorRoutes = require('./routes/author.route');
+const booksRoutes = require('./routes/books.route');
 const cartRoutes = require('./routes/cart.route');
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/auth.route');
 
 const app = express();
 
@@ -71,7 +71,7 @@ mongoose
     app.use('/api/events', eventRoutes);
     app.use('/api/authors', authorRoutes);
     app.use('/api/books', booksRoutes);
-    app.use('/api/ca', cartRoutes);
+    app.use('/api/cart', cartRoutes);
     app.use('/api/auth', authRoutes);
 
     app.listen(PORT, () => {
