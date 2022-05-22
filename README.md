@@ -62,6 +62,59 @@ for secure request
 - [universal-cookie](https://www.npmjs.com/package/universal-cookie)
 - [react-google-login](https://www.npmjs.com/package/react-google-login)
 
+## [Deploy to heroku](https://www.freecodecamp.org/news/how-to-deploy-your-site-using-express-and-heroku/)
+
+### Setting up
+
+You'll need to have:
+
+- Node and npm installed on your local machine (read how to do this [here](https://nodejs.org/en/download/))
+- Git installed (read this [guide](https://www.atlassian.com/git/tutorials/install-git))
+- The Heroku CLI installed ([here's how to do it](https://devcenter.heroku.com/articles/heroku-cli#download-and-install))
+
+### Login to the Heroku CLI and create a new project
+
+There are two options here. The default is for Heroku to let you login through the web browser. Adding the `-i` flag lets you login through the command line.
+
+```shell
+heroku login -i
+```
+
+Now, you can create a new Heroku project. I called mine `papercuts-server`
+
+```shell
+heroku create papercuts-server
+```
+
+Make Sure Provide `.env` With Needed Config
+
+### Create a Procfile
+
+Heroku will need a Procfile to know how to run your app.
+
+```shell
+echo "web: node app.js" > Procfile
+```
+
+Notice that the Procfile has no file extension
+
+### Add and commit files to Git
+
+```shell
+git add .
+git commit -m "ready to deploy"
+```
+
+The final step is to push to your Heroku main branch.
+
+```shell
+git push heroku main
+```
+
+You should see the command line print out a load of information as Heroku builds and deploys your app.
+
+The line to look for is: **`Verifying deploy... done.`**
+
 ## Contribution 🤝
 
 1. Fork it!
