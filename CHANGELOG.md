@@ -1,38 +1,25 @@
+# Changelog
 
-# notes
-
-token column
-
-  userId
-  token(UUID)
-  registerTime
-  accountStatusCode
-  isVerified
-
-OR
-
-on fly token
-
-  hash(username + API_KEY + password + email or registerTime)
-
-site.com/active/encryptedId/hashCode
-
-## todo
+## TODO
 
 - send email on password change
-
-## request security (express.js)
-
-- <https://www.npmjs.com/package/raw-body>
-- <https://www.npmjs.com/package/csurf>
-- <https://www.npmjs.com/package/hpp>
-- <https://www.npmjs.com/package/helmet>
-- <https://www.npmjs.com/package/cors>
-- <https://www.npmjs.com/package/jsonwebtoken>
-- <https://www.npmjs.com/package/express-session>
-- <https://www.npmjs.com/package/universal-cookie>
-- <https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html>
+- reset password (site.com/active/encryptedId/hashCode)
 
 ## 10 May 2022
 
 - init release
+- use MVC for project structure
+- use [jsonwebtoken][jsonwebtoke] to create token for authorization
+- empower validation with [validator][validator]
+- hash password using[bcryptjs][bcryptjs]
+- secure request by useful packages
+- CORS support via cors
+- Body Parsing via body-parser
+- use Mongoose to interact with mongodb
+- JavaScript code linting is done using ESLint.
+- Helmet helps secure Express apps by setting various HTTP headers.
+- Has `.editorconfig` which helps developers define and maintain consistent coding styles between different editors and IDEs.
+
+[validator]: <https://www.npmjs.com/package/validator>
+[jsonwebtoke]: <https://www.npmjs.com/package/jsonwebtoken>
+[bcryptjs]: <https://www.npmjs.com/package/bcryptjs>
