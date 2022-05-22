@@ -1,4 +1,4 @@
-const schema = require('../models/categorySchema');
+const schema = require('../models/category.schema');
 const statusCode = require('../utilities/statusCode');
 
 const catchError = require('../utilities/catchError');

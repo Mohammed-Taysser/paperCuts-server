@@ -1,4 +1,4 @@
-const schema = require('../models/testimonialSchema');
+const schema = require('../models/testimonial.schema');
 const statusCode = require('../utilities/statusCode');
 const catchError = require('../utilities/catchError');
 

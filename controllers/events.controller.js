@@ -1,4 +1,4 @@
-const schema = require('../models/eventSchema');
+const schema = require('../models/event.schema');
 const statusCode = require('../utilities/statusCode');
 const catchError = require('../utilities/catchError');
 

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const schema = require('../models/servicesSchema');
+const schema = require('../models/services.schema');
 const statusCode = require('../utilities/statusCode');
 const catchError = require('../utilities/catchError');
 

@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const schema = require("../models/authorSchema");
+const schema = require("../models/author.schema");
 const statusCode = require("../utilities/statusCode");
 const catchError = require("../utilities/catchError");
 const loginValidation = require("../validations/login.validate");
