@@ -15,6 +15,7 @@ const testimonialRoutes = require('./routes/testimonialRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const authorRoutes = require('./routes/authorRoutes');
 const booksRoutes = require('./routes/booksRoutes');
+const cartRoutes = require('./routes/cart.route');
 const authRoutes = require('./routes/auth');
 
 const app = express();
@@ -70,6 +71,7 @@ mongoose
     app.use('/api/events', eventRoutes);
     app.use('/api/authors', authorRoutes);
     app.use('/api/books', booksRoutes);
+    app.use('/api/ca', cartRoutes);
     app.use('/api/auth', authRoutes);
 
     app.listen(PORT, () => {
