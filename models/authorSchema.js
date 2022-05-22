@@ -1,11 +1,22 @@
 const mongoose = require('mongoose');
+const validator = require('validator/validator');
 const bcrypt = require('bcryptjs');
 const { Schema } = mongoose;
 
 const authorSchema = new Schema(
   {
-    username: { type: String, required: true, unique: true },
-    role: { type: String, default: 'author' },
+    username: {
+      type: String,
+      required: [true, 'username not provided'],
+      trim:true,
+      unique: [true, 'username already exists!'],
+    },
+    role: {
+      type: String,
+      default: 'author',
+      enum: ['author', 'admin'],
+      required: [true, 'Please specify user role'],
+    },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     avatar: {
@@ -13,7 +24,14 @@ const authorSchema = new Schema(
       default:
         'https://cdn.jsdelivr.net/gh/Mohammed-Taysser/rakm1@master/paperCuts/authors/img/avatar-1.png',
     },
-    email: { type: String, required: true },
+    email: {
+      type: String,
+      required: true,
+      validate: {
+        validator: (value) => validator.isEmail(value),
+        message: '{VALUE} is not a valid email!',
+      },
+    },
     password: { type: String, required: true },
     info: String,
     extraInfo: String,
@@ -55,10 +73,10 @@ authorSchema.statics.isExist = async function (username, email) {
   }
 
   if (existUsername) {
-    return { exist: true, error: {username: `username not available`} };
+    return { exist: true, error: { username: `username not available` } };
   }
   if (existEmail) {
-    return { exist: true, error: { email: `email not available`} };
+    return { exist: true, error: { email: `email not available` } };
   }
 
   if (!existUsername && !existEmail) {
