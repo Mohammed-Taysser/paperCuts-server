@@ -16,7 +16,6 @@ const booksSchema = new Schema({
   pdfSize: Number,
   reviews: Number,
   language: [String],
-  types: [{ type: String, default: "paper" }],
   category: [
     {
       title: String,
