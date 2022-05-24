@@ -29,5 +29,8 @@
   "engines": {
     "node": "16.15.0",
     "npm": "8.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.16.0"
   }
 }
