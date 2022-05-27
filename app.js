@@ -17,6 +17,7 @@ const authorRoutes = require('./routes/author.route');
 const booksRoutes = require('./routes/books.route');
 const cartRoutes = require('./routes/cart.route');
 const wishlistRoutes = require('./routes/wishlist.route');
+const couponRoutes = require('./routes/coupon.route');
 const authRoutes = require('./routes/auth.route');
 
 const app = express();
@@ -74,6 +75,7 @@ mongoose
     app.use('/api/books', booksRoutes);
     app.use('/api/cart', cartRoutes);
     app.use('/api/wishlist', wishlistRoutes);
+    app.use('/api/coupon', couponRoutes);
     app.use('/api/auth', authRoutes);
 
     app.listen(PORT, () => {
