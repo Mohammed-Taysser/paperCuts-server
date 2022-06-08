@@ -14,7 +14,7 @@ const authorSchema = new Schema(
 		role: {
 			type: String,
 			default: 'user',
-			enum: ['author', 'admin'],
+			enum: ['author', 'admin', 'user'],
 			required: [true, 'Please specify user role'],
 		},
 		firstName: { type: String, required: true },
