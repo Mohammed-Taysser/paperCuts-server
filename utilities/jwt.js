@@ -11,6 +11,7 @@ function generateToken(author) {
 			email: author.email,
 			username: author.username,
 			avatar: author.avatar,
+			role: author.role,
 		},
 		JWT_SECRET_KEY,
 		{
