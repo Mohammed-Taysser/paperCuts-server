@@ -107,3 +107,17 @@ exports.search = async (request, response) => {
 			response.status(statusCode.success.ok).json(results);
 		});
 };
+
+exports.create = async (request, response) => {
+	'use strict';
+	const createdItem = new schema(request.body);
+
+	await createdItem
+		.save()
+		.then((results) => {
+			response.status(statusCode.success.created).json(results);
+		})
+		.catch((error) => {
+			catchError(response, statusCode.error.conflict, error.message);
+		});
+};
