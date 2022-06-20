@@ -86,6 +86,37 @@ exports.login = async (request, response) => {
 	}
 };
 
+// password
+// exports.resetPassword = async (request, response) => {
+// 	'use strict';
+
+// 	const { email } = request.body;
+// 	const { authorization } = request.headers;
+
+// 	const mail = nodemailer.createTransport({
+// 		service: 'gmail',
+// 		auth: {
+// 			user: '', // Your email id
+// 			pass: '', // Your password
+// 		},
+// 	});
+
+// 	const mailOptions = {
+// 		from: 'mohamedtaysser983@gmail.com',
+// 		to: email,
+// 		subject: 'Reset Password Link - paperCuts.com',
+// 		html: '<p>You requested for reset password, kindly use this <a href="http://localhost:4000/reset-password >link</a> to reset your password</p>',
+// 	};
+
+// 	mail.sendMail(mailOptions, function (error, info) {
+// 		if (error) {
+// 			catchError(response, statusCode.error.serverError, error.message);
+// 		} else {
+// 			response.status(statusCode.success.ok).json(info);
+// 		}
+// 	});
+// };
+
 // token's
 exports.refresh = async (request, response) => {
 	'use strict';
