@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const jwtDecode = require('jwt-decode');
 const schema = require('../models/author.schema');
 const statusCode = require('../utilities/statusCode');
 const catchError = require('../utilities/catchError');
@@ -122,16 +123,18 @@ exports.refresh = async (request, response) => {
 	'use strict';
 	const { authorization } = request.headers;
 	if (authorization) {
-		await verifyToken(authorization, (error, author) => {
+		await verifyToken(authorization, async (error) => {
 			if (error && error.name === 'TokenExpiredError') {
-				response.status(403).json(error);
+				const author = await jwtDecode(authorization);
+				const token = await generateToken(author);
+				response.status(statusCode.success.created).json({ token });
 			} else {
-				response.status(200).json({
-					authorization,
-				});
+				response.status(statusCode.error.badRequest).json({ error });
 			}
 		});
 	} else {
-		response.json({ message: `no token` }).end();
+		response
+			.status(statusCode.error.badRequest)
+			.json({ message: `no token provide!` });
 	}
 };
