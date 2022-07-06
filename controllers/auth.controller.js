@@ -54,30 +54,31 @@ exports.login = async (request, response) => {
 		await schema
 			.findOne({ email })
 			.then(async (results) => {
-				if (!results) {
+				if (results) {
+					await bcrypt
+						.compare(password, results.password)
+						.then(async (isMatch) => {
+							if (isMatch) {
+								const token = await generateToken(results);
+								request.header('authorization', token);
+								response.status(statusCode.success.ok).json({
+									author: results,
+									token,
+								});
+							} else {
+								catchError(response, statusCode.error.badRequest, {
+									password: 'Password Not Correct',
+								}).end();
+							}
+						})
+						.catch((error) => {
+							catchError(response, statusCode.error.serverError, error.message);
+						});
+				} else {
 					catchError(response, statusCode.error.badRequest, {
 						notExist: `author not exist`,
-					}).end();
-				}
-				await bcrypt
-					.compare(password, results.password)
-					.then(async (isMatch) => {
-						if (isMatch) {
-							const token = await generateToken(results);
-							request.header('authorization', token);
-							response.status(statusCode.success.ok).json({
-								author: results,
-								token,
-							});
-						} else {
-							catchError(response, statusCode.error.badRequest, {
-								password: 'Password Not Correct',
-							}).end();
-						}
-					})
-					.catch((error) => {
-						catchError(response, statusCode.error.serverError, error.message);
 					});
+				}
 			})
 			.catch((error) => {
 				catchError(response, statusCode.error.serverError, error.message);
@@ -136,5 +137,50 @@ exports.refresh = async (request, response) => {
 		response
 			.status(statusCode.error.badRequest)
 			.json({ message: `no token provide!` });
+	}
+};
+
+// dashboard
+exports.adminLogin = async (request, response) => {
+	'use strict';
+	const { email, password } = request.body;
+
+	const errorAsObject = loginValidation(email, password);
+
+	if (Object.keys(errorAsObject).length === 0) {
+		await schema
+			.findOne({ email, role: 'admin' })
+			.then(async (results) => {
+				if (results) {
+					await bcrypt
+						.compare(password, results.password)
+						.then(async (isMatch) => {
+							if (isMatch) {
+								const token = await generateToken(results);
+								request.header('authorization', token);
+								response.status(statusCode.success.ok).json({
+									admin: results,
+									token,
+								});
+							} else {
+								catchError(response, statusCode.error.badRequest, {
+									password: 'Password Not Correct',
+								}).end();
+							}
+						})
+						.catch((error) => {
+							catchError(response, statusCode.error.serverError, error.message);
+						});
+				} else {
+					catchError(response, statusCode.error.badRequest, {
+						notExist: `admin not exist`,
+					}).end();
+				}
+			})
+			.catch((error) => {
+				catchError(response, statusCode.error.serverError, error.message);
+			});
+	} else {
+		catchError(response, statusCode.error.badRequest, errorAsObject);
 	}
 };
