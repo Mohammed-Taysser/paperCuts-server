@@ -20,6 +20,7 @@ const wishlistRoutes = require('./routes/wishlist.route');
 const couponRoutes = require('./routes/coupon.route');
 const orderRoutes = require('./routes/order.route');
 const authRoutes = require('./routes/auth.route');
+const utilitiesRoutes = require('./routes/utilities.route');
 
 const app = express();
 
@@ -79,6 +80,7 @@ mongoose
     app.use('/api/coupon', couponRoutes);
     app.use('/api/order', orderRoutes);
     app.use('/api/auth', authRoutes);
+		app.use('/api/utilities', utilitiesRoutes);
 
     app.listen(PORT, () => {
       console.log(`PaperCuts Server listening on port:${PORT}`);
