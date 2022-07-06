@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/register', controller.register);
 router.post('/login', controller.login);
+router.post('/admin/login', controller.adminLogin);
 router.post('/token/refresh', controller.refresh);
 
 module.exports = router;
