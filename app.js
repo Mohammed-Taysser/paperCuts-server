@@ -8,7 +8,6 @@ const helmet = require('helmet');
 const hpp = require('hpp');
 require('dotenv').config();
 
-const servicesRoutes = require('./routes/services.route');
 const categoryRoutes = require('./routes/category.route');
 const eventRoutes = require('./routes/event.route');
 const authorRoutes = require('./routes/author.route');
@@ -66,7 +65,6 @@ mongoose
   .connect(MONGO_URL)
   .then(() => {
     // routes
-    app.use('/api/services', servicesRoutes);
     app.use('/api/category', categoryRoutes);
     app.use('/api/events', eventRoutes);
     app.use('/api/authors', authorRoutes);
