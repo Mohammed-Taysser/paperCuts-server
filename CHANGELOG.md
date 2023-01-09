@@ -5,6 +5,10 @@
 - send email on password change
 - reset password (site.com/active/encryptedId/hashCode)
 
+## 9 Jan 2023
+
+- Drop `team` & `testimonial` & `services` from api
+
 ## 10 May 2022
 
 - init release
