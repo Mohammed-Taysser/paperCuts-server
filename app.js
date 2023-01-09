@@ -9,9 +9,7 @@ const hpp = require('hpp');
 require('dotenv').config();
 
 const servicesRoutes = require('./routes/services.route');
-const teamRoutes = require('./routes/team.route');
 const categoryRoutes = require('./routes/category.route');
-const testimonialRoutes = require('./routes/testimonial.route');
 const eventRoutes = require('./routes/event.route');
 const authorRoutes = require('./routes/author.route');
 const booksRoutes = require('./routes/books.route');
@@ -69,9 +67,7 @@ mongoose
   .then(() => {
     // routes
     app.use('/api/services', servicesRoutes);
-    app.use('/api/team', teamRoutes);
     app.use('/api/category', categoryRoutes);
-    app.use('/api/testimonial', testimonialRoutes);
     app.use('/api/events', eventRoutes);
     app.use('/api/authors', authorRoutes);
     app.use('/api/books', booksRoutes);
