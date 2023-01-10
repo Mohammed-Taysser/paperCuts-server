@@ -22,7 +22,7 @@ const authorSchema = new Schema(
 		avatar: {
 			type: String,
 			default:
-				'https://cdn.jsdelivr.net/gh/Mohammed-Taysser/rakm1@master/paperCuts/authors/img/avatar-1.png',
+				'https://res.cloudinary.com/mohammed-taysser/image/upload/v1654679434/paperCuts/authors/avatar-2_grpukn.png',
 		},
 		email: {
 			type: String,
