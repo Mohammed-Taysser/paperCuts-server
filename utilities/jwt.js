@@ -9,6 +9,8 @@ function generateToken(author) {
 		{
 			_id: author._id,
 			email: author.email,
+			firstName: author.firstName,
+			lastName: author.lastName,
 			username: author.username,
 			avatar: author.avatar,
 			role: author.role,
