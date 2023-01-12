@@ -59,9 +59,7 @@ exports.update = async (request, response) => {
 		await schema
 			.findByIdAndUpdate(request.author._id, setting, { new: true })
 			.then(async (results) => {
-				if (setting.username || setting.email) {
-					token = await generateToken(results);
-				}
+				token = await generateToken(results);
 
 				response.status(statusCode.success.ok).json({ author: results, token });
 			});
