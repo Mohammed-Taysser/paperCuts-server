@@ -77,19 +77,3 @@ exports.delete = async (request, response) => {
 			catchError(response, statusCode.error.serverError, error.message);
 		});
 };
-
-exports.deleteAll = async (request, response) => {
-	'use strict';
-
-	const cart = await schema.find({ username: request.author.username });
-	const idArray = cart.map((item) => item._id);
-
-	await schema
-		.deleteMany({ _id: { $in: idArray } })
-		.then((results) => {
-			response.status(statusCode.success.ok).json(results);
-		})
-		.catch((error) => {
-			catchError(response, statusCode.error.serverError, error.message);
-		});
-};
