@@ -24,6 +24,8 @@ const swaggerFile = require('./swagger.json');
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 // logger
 app.enable('verbose errors');
 app.use(logger('dev'));
