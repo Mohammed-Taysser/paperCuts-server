@@ -63,7 +63,7 @@ app.get('/',(request,response)=>{
 	response.send('<h1>API <a href="/docs" >DOCS</a></h1>')
 })
 
-app.get('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // connect to DB
 mongoose
