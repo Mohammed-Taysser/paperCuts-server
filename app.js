@@ -19,6 +19,9 @@ const orderRoutes = require('./routes/order.route');
 const authRoutes = require('./routes/auth.route');
 const utilitiesRoutes = require('./routes/utilities.route');
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger.json');
+
 const app = express();
 
 // logger
@@ -52,13 +55,8 @@ app.use(
 // Serving static files
 app.use('/static', express.static('static'));
 
-// create index page for documentation
-app.set('views', './views');
-app.set('view engine', 'pug');
-
-app.all('/', (_, response) => {
-  response.status(200).render('index');
-});
+// Use / as docs route
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // connect to DB
 mongoose
