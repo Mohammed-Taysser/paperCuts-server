@@ -1,0 +1,651 @@
+openapi: 3.0.0
+info:
+  title: PaperCuts API
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://papercuts-server.onrender.com/api
+    variables: {}
+paths:
+  /category:
+    get:
+      tags:
+        - Category
+      summary: Get All Category
+      operationId: GetAllCategory
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /category/{slug}:
+    parameters:
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+        description: Category slug
+    get:
+      tags:
+        - Category
+      summary: Get Category By Slug
+      operationId: GetCategoryBySlug
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /books:
+    get:
+      tags:
+        - Books
+      summary: Get All Books
+      description: ''
+      operationId: GetAllBooks
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /books/{slug}:
+    parameters:
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+        description: Book slug
+    get:
+      tags:
+        - Books
+      summary: Get Book By Slug
+      operationId: GetBookBySlug
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /books/search:
+    get:
+      tags:
+        - Books
+      summary: Get Books By Category or Author
+      operationId: GetBooksByCategory
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: username
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /books/latest:
+    get:
+      tags:
+        - Books
+      summary: Get Latest Books
+      operationId: GetLatestBooks
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /books/related:
+    get:
+      tags:
+        - Books
+      summary: Get Related Books
+      operationId: GetRelatedBooks
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /books/top5:
+    get:
+      tags:
+        - Books
+      summary: Get Top 5 Books
+      operationId: GetTop5Books
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /books/create:
+    post:
+      tags:
+        - Books
+      summary: Create Book
+      operationId: CreateBook
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /authors:
+    get:
+      tags:
+        - Author
+      summary: getAllAuthors
+      operationId: getAllAuthors
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /authors/{username}:
+    parameters:
+      - in: path
+        name: username
+        schema:
+          type: string
+        required: true
+        description: username
+    get:
+      tags:
+        - Author
+      summary: Get Author By Username
+      operationId: GetAuthorByUsername
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /authors/search:
+    get:
+      tags:
+        - Author
+      summary: Author Search
+      operationId: AuthorSearch
+      parameters:
+        - name: username
+          in: query
+          description: ''
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+            example: Mohammed-Taysser
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /authors/update-avatar:
+    post:
+      tags:
+        - Author
+      summary: Update Author Avatar
+      operationId: UpdateAuthorAvatar
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - avatar
+              type: object
+              properties:
+                avatar:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /events:
+    get:
+      tags:
+        - Events
+      summary: get all events
+      operationId: getallevents
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /events/{slug}:
+    parameters:
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+        description: Event slug
+    get:
+      tags:
+        - Events
+      summary: get event by slug
+      operationId: geteventbyslug
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login by email
+      operationId: Loginbyemail
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register
+      operationId: Register
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/token/refresh:
+    post:
+      tags:
+        - Auth
+      summary: refresh token
+      operationId: refreshtoken
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /wishlist:
+    get:
+      tags:
+        - Wishlist
+      summary: get all author wishlist
+      security:
+        - authorization: []
+      operationId: getallauthorwishlist
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /wishlist/view/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: Whislist id
+    get:
+      tags:
+        - Wishlist
+      summary: get withlist
+      operationId: getwithlist
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /wishlist/create:
+    post:
+      tags:
+        - Wishlist
+      summary: create wishlist
+      operationId: createwishlist
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /wishlist/delete/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: Whislist ID
+    delete:
+      tags:
+        - Wishlist
+      summary: delete wishlist
+      operationId: deletewishlist
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /cart:
+    get:
+      tags:
+        - Cart
+      summary: get all author cart
+      operationId: getallauthorcart
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /cart/delete/all:
+    delete:
+      tags:
+        - Cart
+      summary: delete all author cart
+      operationId: deleteallauthorcart
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /cart/view/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: Cart ID
+    get:
+      tags:
+        - Cart
+      summary: get cart
+      operationId: getcart
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /cart/create:
+    post:
+      tags:
+        - Cart
+      summary: create cart
+      operationId: createcart
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /cart/delete/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: Cart ID
+    delete:
+      tags:
+        - Cart
+      summary: delete cart
+      operationId: deletecart
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /coupon:
+    get:
+      tags:
+        - Coupon
+      summary: get all coupons
+      operationId: getallcoupons
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /coupon/view/{label}:
+    parameters:
+      - in: path
+        name: label
+        schema:
+          type: string
+        required: true
+        description: Coupon Label
+    get:
+      tags:
+        - Coupon
+      summary: get coupon by label
+      operationId: getcouponbylabel
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /order:
+    get:
+      tags:
+        - Order
+      summary: get all orders
+      operationId: getallorders
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /order/create:
+    post:
+      tags:
+        - Order
+      summary: create order
+      operationId: createorder
+      parameters:
+        - name: authorization
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: '{{token}}'
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /utilities/languages:
+    get:
+      tags:
+        - utilities
+      summary: get languages
+      operationId: getlanguages
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  securitySchemes:
+    authorization:
+      type: apiKey
+      name: authorization
+      in: header
+security:
+  - authorization: []
+tags:
+  - name: Category
+  - name: Books
+  - name: Author
+  - name: Events
+  - name: Auth
+  - name: Wishlist
+  - name: Cart
+  - name: Coupon
+  - name: Order
+  - name: utilities

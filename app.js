@@ -20,7 +20,8 @@ const authRoutes = require('./routes/auth.route');
 const utilitiesRoutes = require('./routes/utilities.route');
 
 const swaggerUi = require('swagger-ui-express');
-const swaggerFile = require('./swagger.json');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
 
 const app = express();
 
@@ -55,10 +56,14 @@ app.use(
 );
 
 // Serving static files
-app.use('/static', express.static('static'));
+app.get('/static', express.static('static'));
 
 // Use / as docs route
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.get('/',(request,response)=>{
+	response.send('<h1>API <a href="/docs" >DOCS</a></h1>')
+})
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // connect to DB
 mongoose
