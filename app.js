@@ -56,10 +56,10 @@ app.use(
 );
 
 // Serving static files
-app.get('/static', express.static('static'));
+app.use('/static', express.static('static'));
 
 // Use / as docs route
-app.get('/',(request,response)=>{
+app.use('/',(request,response)=>{
 	response.send('<h1>API <a href="/docs" >DOCS</a></h1>')
 })
 
