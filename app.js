@@ -59,11 +59,11 @@ app.use(
 app.use('/static', express.static('static'));
 
 // Use / as docs route
-app.use('/',(request,response)=>{
+app.get('/',(request,response)=>{
 	response.send('<h1>API <a href="/docs" >DOCS</a></h1>')
 })
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.get('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // connect to DB
 mongoose
