@@ -58,8 +58,8 @@ app.use(
 // Serving static files
 app.use('/static', express.static('static'));
 
-// Use / as docs route
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// Use /docs as docs route
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // connect to DB
 mongoose
